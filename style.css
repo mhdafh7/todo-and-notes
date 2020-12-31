@@ -1,0 +1,212 @@
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background: -webkit-linear-gradient(right, #eaeaea, #e5e5e5);
+  color: #555859;
+  font-size: 1.2rem;
+  min-height: 100vh;
+}
+.title {
+  font-size: 72px;
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: inherit;
+}
+.main-header {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 5rem;
+}
+.header-nav {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+/* search */
+.search-bar {
+  position: absolute;
+  right: 40rem;
+  top: 4rem;
+}
+.search-bar .search-form input[type="text"] {
+  border: none;
+  border-radius: 15px;
+  float: left;
+  padding: 0.8rem 0.5rem;
+  padding-left: 0.6rem;
+  font-size: 17px;
+  font-weight: 100;
+  width: 360px;
+  background: #f2f6f5;
+  box-shadow: 3px 3px 14px rgba(0, 0, 0, 0.05);
+}
+.search-bar .search-form button {
+  background: transparent;
+  align-self: center;
+  border: none;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  position: absolute;
+  right: 0.3rem;
+  cursor: pointer;
+  color: rgba(85, 88, 89, 0.7);
+  transition: all 0.3s ease-in;
+}
+.search-bar .search-form button:hover {
+  transform: scale(1.2);
+  color: rgba(85, 88, 89, 0.8);
+}
+/* nav ul */
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 2rem;
+  list-style: none;
+}
+
+/* nav links (li)*/
+.nav-link {
+  margin-left: 2rem;
+  color: inherit;
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  transition: all 0.2s ease-in;
+}
+.nav-link:hover {
+  font-weight: bold;
+}
+.nav-link .nav-active{
+  background: #76db9b;
+  padding: .4rem 1.3rem;
+  border-radius: 15px;
+  font-weight: bold;
+}
+.container {
+  display: flex;
+  margin-bottom: 5rem;
+}
+.welcome-text {
+  font-weight: 400;
+  font-size: 24px;
+}
+.todo-container-title {
+  font-size: 40px;
+  font-weight: 600;
+  margin: 1rem;
+}
+.left-container {
+  padding: 5rem;
+  height: 550px;
+  width: 660px;
+}
+.right-container {
+  padding: 2rem;
+  margin-left: 15rem;
+  margin-right: 7rem;
+  margin-top: 4rem;
+  border-radius: 19px;
+  height: 580px;
+  width: 950px;
+  background-color: #76db9b;
+  box-shadow: 3px 4px 26px rgba(0, 0, 0, 0.1);
+}
+/* calendar */
+.calendar {
+  margin-top: 2rem;
+  box-shadow: 3px 4px 26px rgba(0, 0, 0, 0.05);
+  border-radius: 18px;
+}
+.calendar .month {
+  padding: 3rem 1rem;
+  width: 100%;
+  border-radius: 18px 18px 0 0;
+  background: #f2f6f5;
+  text-align: center;
+  align-items: center;
+}
+.calendar ul {
+  list-style: none;
+  margin: 0%;
+  padding: 0%;
+}
+.calendar .month ul li {
+  /* color: #f2f6f5; */
+  font-size: 1rem;
+  letter-spacing: 3px;
+}
+.month .prev {
+  float: left;
+  padding-top: 0.8rem;
+  margin-left: .4rem;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+}
+.month .next {
+  float: right;
+  padding-top: 0.8rem;
+  margin-right: .4rem;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+}
+.month .prev:hover,
+.month .next:hover {
+  transform: scale(1.1, 1.3);
+}
+.weekdays {
+  margin: 0%;
+  padding: 1rem;
+}
+.weekdays li {
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  width: 13.3%;
+  padding: 0.3rem 0.9rem;
+  align-items: center;
+  text-align: center;
+  opacity: 0.6;
+}
+
+.calendar .days {
+  padding: 0.5rem;
+  background: #f2f6f5;
+  border-radius: 0 0 18px 18px;
+}
+.calendar .weekdays {
+  padding: 0 0.5rem;
+  background: #f2f6f5;
+}
+
+.days li {
+  font-size: 1rem;
+  padding: 1rem 0.7rem;
+  list-style-type: none;
+  display: inline-block;
+  width: 13.3%;
+  border-radius: 20px;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+.days .active li {
+  align-self: center;
+  padding: 0.7rem 0.49rem;
+  background: #76db9b;
+  color: #f2f6f5 !important;
+}
+.days li:hover {
+  padding: 0.7rem 0.49rem;
+  background: rgba(118, 219, 155, 0.8);
+  color: #f2f6f5;
+}

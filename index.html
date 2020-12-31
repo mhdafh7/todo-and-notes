@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/0efc881636.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Todo & Notes</title>
+  </head>
+  <body>
+    <header class="main-header">
+      <!-- Title, navigation and search -->
+      <h1 class="title">Todo</h1>
+      <nav class="header-nav">
+        <div class="search-bar">
+          <form class="search-form">
+            <input type="text" name="search" />
+            <button class="search-submit">
+              <i class="fas fa-lg fa-search"></i>
+            </button>
+          </form>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a href="#" class="nav-link" id="todo"><span class="nav-active">todo</span></a>
+          </li>
+          <li><a href="#" class="nav-link" id="notes"><span>notes</span></a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="left-container">
+        <h3 class="welcome-text">Welcome-back John!</h3>
+        <!-- Dummy calendar for now -->
+        <div class="calendar">
+          <div class="month">
+            <ul>
+              <li class="prev">&#10094;</li>
+              <li class="next">&#10095;</li>
+              <li>
+                August<br />
+                <span style="font-size: 18px">2017</span>
+              </li>
+            </ul>
+          </div>
+
+          <ul class="weekdays">
+            <li>Mo</li>
+            <li>Tu</li>
+            <li>We</li>
+            <li>Th</li>
+            <li>Fr</li>
+            <li>Sa</li>
+            <li>Su</li>
+          </ul>
+
+          <ul class="days">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <span class="active"><li>10</li></span>
+            <li>11</li>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li>15</li>
+            <li>16</li>
+            <li>17</li>
+            <li>18</li>
+            <li>19</li>
+            <li>20</li>
+            <li>21</li>
+            <li>22</li>
+            <li>23</li>
+            <li>24</li>
+            <li>25</li>
+            <li>26</li>
+            <li>27</li>
+            <li>28</li>
+            <li>29</li>
+            <li>30</li>
+            <li>31</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="right-container">
+        <div class="todo-container">
+          <h3 class="todo-container-title">Today</h3>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
