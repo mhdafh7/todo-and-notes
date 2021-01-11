@@ -9,10 +9,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <script
-      src="https://kit.fontawesome.com/0efc881636.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="todo.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <title>Todo & Notes</title>
   </head>
   <body>
@@ -21,23 +22,31 @@
       <h1 class="title">Todo</h1>
       <nav class="header-nav">
         <div class="search-bar">
+          <!--NYI-->
           <form class="search-form">
             <input type="text" name="search" />
             <button class="search-submit">
-              <i class="fas fa-lg fa-search"></i>
+              <i class="material-icons md-24">search</i>
             </button>
           </form>
+          <!--NYI-->
         </div>
         <ul class="nav-links">
           <li>
-            <a href="#" class="nav-link" id="todo"><span class="nav-active">todo</span></a>
+            <a href="#" class="nav-link" id="todo"
+              ><span class="nav-active">todo</span></a
+            >
           </li>
-          <li><a href="#" class="nav-link" id="notes"><span>notes</span></a></li>
+          <li>
+            <!--NYI-->
+            <a href="#" class="nav-link" id="notes">notes</a>
+            <!--NYI-->
+          </li>
         </ul>
       </nav>
     </header>
     <div class="container">
-      <div class="left-container">
+      <section class="left-container">
         <h3 class="welcome-text">Welcome-back John!</h3>
         <!-- Dummy calendar for now -->
         <div class="calendar">
@@ -96,13 +105,40 @@
             <li>31</li>
           </ul>
         </div>
-      </div>
+      </section>
 
-      <div class="right-container">
-        <div class="todo-container">
-          <h3 class="todo-container-title">Today</h3>
+      <section class="right-container">
+        <div class="todo-container-header">
+          <h3 class="todo-title">Today</h3>
+
+          <div class="filter-select-wrapper">
+            <div class="filter-select">
+              <div class="filter-select__trigger">
+                <span>All</span>
+                <div class="arrow"></div>
+              </div>
+              <div class="filter-options filter-todo">
+                <span class="filter-option selected" data-value="all">All</span>
+                <span class="filter-option" data-value="completed"
+                  >Completed</span
+                >
+                <span class="filter-option" data-value="incomplete"
+                  >Incomplete</span
+                >
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+        <form class="new-todo-form">
+          <input type="text" class="todo-input" required />
+          <button class="todo-button" type="submit">
+            <i class="material-icons md-36">add</i>
+          </button>
+        </form>
+        <div class="todo-container">
+          <ul class="todo-list"></ul>
+        </div>
+      </section>
     </div>
 
     <script src="app.js"></script>
