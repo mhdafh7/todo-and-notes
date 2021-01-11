@@ -24,7 +24,7 @@ function addTodo(event) {
     newTodo.innerText = todoInput.value;
 
     // Store
-    Store(todoInput.value);
+    Store(storeTodo(todoInput.value,"incomplete"));
 
     // Check button(complete)
     const checkButton = document.createElement("button");
@@ -61,7 +61,7 @@ function checkDelete(e) {
   // check todo
   if (item.classList[0] === "check-btn") {
     const todo = item.parentElement;
-    todo.classList.add("completed");
+    checkTodo(todo);
   }
 }
 
@@ -93,15 +93,24 @@ function filterTodo(e) {
   });
 }
 
+// Store the todo as an object for filter persistence
+function storeTodo(todoItem,filterClass) {
+  let todo = {
+    title: todoItem,
+    filter: filterClass
+  }
+  return todo;
+}
+
 // Store
-function Store(todo) {
+function Store(todoItem) {
   let todos;
   if (localStorage.getItem("todos") === null) {
     todos = [];
   } else {
     todos = JSON.parse(localStorage.getItem("todos"));
   }
-  todos.push(todo);
+  todos.push(todoItem);
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
@@ -122,7 +131,10 @@ function getTodos() {
       const newTodo = document.createElement("li");
       newTodo.classList.add("todo-item");
       todoDiv.appendChild(newTodo);
-      newTodo.innerText = todo;
+      newTodo.innerText = todo.title;
+      if (todo.filter === 'completed') {
+        newTodo.parentElement.classList.add("completed");
+      }
 
       // Check button(complete)
       const checkButton = document.createElement("button");
@@ -151,8 +163,24 @@ function removeTodo(todo) {
   } else {
     todos = JSON.parse(localStorage.getItem('todos'));
   }
-  const todoIndex = todo.children[0].innerText;
+  const todoTitle = todo.children[0].innerText;
+  const todoIndex = todos.find(todo => todo.title === todoTitle);
   todos.splice(todos.indexOf(todoIndex),1);
+  localStorage.setItem('todos',JSON.stringify(todos));
+}
+// Add persistent completed class
+function checkTodo(todo) {
+  let todos;
+
+  if (localStorage.getItem('todos') === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem('todos'));
+  }
+  const todoTitle = todo.children[0].innerText;
+  let todoItem = todos.find(todo => todo.title === todoTitle);
+  todoItem.filter = "completed";
+  todo.classList.add("completed");
   localStorage.setItem('todos',JSON.stringify(todos));
 }
 
