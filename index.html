@@ -8,8 +8,9 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="todo.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/todo.css" />
+    <link rel="stylesheet" href="css/filter.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -19,94 +20,35 @@
   <body>
     <header class="main-header">
       <!-- Title, navigation and search -->
-      <h1 class="title">Todo</h1>
       <nav class="header-nav">
-        <div class="search-bar">
-          <!--NYI-->
-          <form class="search-form">
-            <input type="text" name="search" />
-            <button class="search-submit">
-              <i class="material-icons md-24">search</i>
-            </button>
-          </form>
-          <!--NYI-->
+        <a class="home">Todo <span> App</span></a>
+
+        <button class="nav-icon">
+          <span class="nav-icon-bar"></span>
+          <span class="nav-icon-bar"></span>
+          <span class="nav-icon-bar"></span>
+        </button>
+        <div class="nav-menu">
+          <ul class="nav-links">
+            <li class="nav-item nav-search">
+              <a class="nav-link" href="#"><i class="material-icons">search</i></a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">todo</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">notes</a></li>
+          </ul>
         </div>
-        <ul class="nav-links">
-          <li>
-            <a href="#" class="nav-link" id="todo"
-              ><span class="nav-active">todo</span></a
-            >
-          </li>
-          <li>
-            <!--NYI-->
-            <a href="#" class="nav-link" id="notes">notes</a>
-            <!--NYI-->
-          </li>
-        </ul>
       </nav>
     </header>
     <div class="container">
       <section class="left-container">
-        <h3 class="welcome-text">Welcome-back John!</h3>
-        <!-- Dummy calendar for now -->
-        <div class="calendar">
-          <div class="month">
-            <ul>
-              <li class="prev">&#10094;</li>
-              <li class="next">&#10095;</li>
-              <li>
-                August<br />
-                <span style="font-size: 18px">2017</span>
-              </li>
-            </ul>
-          </div>
-
-          <ul class="weekdays">
-            <li>Mo</li>
-            <li>Tu</li>
-            <li>We</li>
-            <li>Th</li>
-            <li>Fr</li>
-            <li>Sa</li>
-            <li>Su</li>
-          </ul>
-
-          <ul class="days">
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>7</li>
-            <li>8</li>
-            <li>9</li>
-            <span class="active"><li>10</li></span>
-            <li>11</li>
-            <li>12</li>
-            <li>13</li>
-            <li>14</li>
-            <li>15</li>
-            <li>16</li>
-            <li>17</li>
-            <li>18</li>
-            <li>19</li>
-            <li>20</li>
-            <li>21</li>
-            <li>22</li>
-            <li>23</li>
-            <li>24</li>
-            <li>25</li>
-            <li>26</li>
-            <li>27</li>
-            <li>28</li>
-            <li>29</li>
-            <li>30</li>
-            <li>31</li>
-          </ul>
+        <div class="left-container-header">
+          <h3 class="left-container-title">Welcome back!</h3>
+          <h3 class="left-container-text">
+            You have <span class="todo-number">_</span> tasks to complete.
+          </h3>
         </div>
+        <img src="./undraw_task_list_6x9d.svg" alt="image" />
       </section>
-
       <section class="right-container">
         <div class="todo-container-header">
           <h3 class="todo-title">Today</h3>

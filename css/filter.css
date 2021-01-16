@@ -1,0 +1,116 @@
+.filter-select-wrapper {
+  position: relative;
+  user-select: none;
+  width: 25%;
+  top: 2rem;
+  right: 1.5rem;
+}
+.filter-select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+.filter-select__trigger {
+  box-shadow: 3px 3px 8px 2px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #f2f6f5;
+  height: 3rem;
+  line-height: 3rem;
+  background: #76db9b;
+  cursor: pointer;
+  border: none;
+}
+.filter-options {
+  border-radius: 10px;
+  position: absolute;
+  display: block;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: none;
+  background: #f2f6f5;
+  transition: all 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.filter-select.open .filter-options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  margin-top: 0.5rem;
+  box-shadow: 2px 3px 14px 2px rgba(0, 0, 0, 0.1);
+}
+.filter-option.selected {
+  border-radius: 10px;
+  background: #f2f6f5;
+  color: #76db9b;
+}
+.filter-option {
+  position: relative;
+  display: block;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #76db9b;
+  line-height: 3rem;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.filter-option:hover {
+  cursor: pointer;
+  background-color: #76db9b;
+  color: #f2f6f5;
+  border-radius: 10px;
+}
+.filter-option.selected {
+  color: #f2f6f5;
+  background-color: #76db9b;
+}
+.arrow {
+  position: relative;
+  height: 0.8rem;
+  width: 0.8rem;
+}
+.arrow::before,
+.arrow::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  width: 0.15rem;
+  height: 100%;
+  transition: all 0.5s;
+}
+.arrow::before {
+  left: -4px;
+  transform: rotate(-45deg);
+  background-color: #f2f6f5;
+}
+.arrow::after {
+  left: 4px;
+  transform: rotate(45deg);
+  background-color: #f2f6f5;
+}
+.open .arrow::before {
+  left: -4px;
+  transform: rotate(45deg);
+}
+.open .arrow::after {
+  left: 4px;
+  transform: rotate(-45deg);
+}
+@media (max-width:810px){
+  .filter-select-wrapper{
+    margin-left: 2.5rem;
+    margin-bottom: 2rem;
+    width: auto;
+  }
+}
