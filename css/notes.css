@@ -1,10 +1,23 @@
-.todo-container-header {
+.notes-img {
+  height: 267px;
+  width: 483px;
+  margin-top: 4rem;
+  z-index: -5;
+}
+
+.left-container-text {
+  display: inline-block;
+  margin-top: 2rem;
+  font-weight: 400;
+  font-size: 2rem;
+}
+.notes-container-header {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
 }
 
-.todo-title {
+.notes-title {
   font-size: 40px;
   font-weight: 600;
   margin: 1rem;
@@ -12,46 +25,7 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.new-todo-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 3rem auto;
-  margin-bottom: 1rem;
-}
-.todo-input,
-.todo-button {
-  padding: 0.7rem;
-  margin-bottom: 1rem;
-  background: #ffffff;
-  border: 0px;
-  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.13);
-  box-sizing: border-box;
-}
-.todo-input {
-  font-size: 1.5rem;
-  border-radius: 15px 0 0 15px;
-  width: 90%;
-  padding: 1rem;
-  color: #555859;
-  font-weight: 300;
-}
-.todo-button {
-  color: #76db9b;
-  padding: 0.7rem 0.5rem;
-  padding-top: 0.8rem;
-  padding-bottom: 0.6rem;
-  border-radius: 0 15px 15px 0;
-  transition: all 0.3s ease-in-out;
-}
-
-.todo-button:hover {
-  background: #76db9b;
-  color: #f2f6f5;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-}
-
-.todo-container {
+.notes-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,22 +36,22 @@
   scroll-behavior: smooth;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
-.todo-container::-webkit-scrollbar {
+.notes-container::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-.todo-container {
+.notes-container {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-.todo-list {
+.notes-list {
   margin-bottom: auto;
   min-width: 100%;
   min-height: 100%;
   list-style: none;
 }
-.todo {
+.notes {
   margin: 0.7rem;
   background: #f2f6f5;
   font-size: 1.2rem;
@@ -88,22 +62,22 @@
   border-radius: 10px;
   border: 0;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   overflow-x: auto;
   padding-left: 1rem;
 }
 /* text minimization */
-.todo-item {
+.notes-item {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   width: 1.2rem;
   margin-right: 1rem;
 }
-.todo li {
+.notes li {
   flex: 1;
 }
-.check-btn,
+.edit-btn,
 .delete-btn {
   display: flex;
   align-items: center;
@@ -115,11 +89,11 @@
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
 }
-.check-btn {
+.edit-btn {
   color: #76db9b;
   border-radius: 10px 0 0 10px;
 }
-.check-btn:hover {
+.edit-btn:hover {
   color: #f2f6f5;
   background: #76db9b;
 }
@@ -132,23 +106,44 @@
   background: #e84846;
 }
 
-/* Complete class */
-.completed .todo-item {
-  text-decoration: line-through;
-  opacity: 0.6;
-  transition: all 0.6s;
+
+@media (max-width: 1676px) {
+  .notes-img {
+    margin: 6rem 0;
+    margin-right: 8rem;
+    transform: scale(1.3);
+  }
 }
-.completed .check-btn {
-  opacity: 0;
-  pointer-events: none;
+@media (max-width: 1400px) {
+  .left-container-text {
+    font-size: 1.5rem;
+  }
+  .notes-img {
+    height: 205px;
+    width: 371px;
+    margin-top: 4rem;
+  }
 }
-.completed .delete-btn{
-  text-decoration: none;
+@media (max-width: 1139px) {
+  .notes-img {
+    display: none;
+  }
+  .notes-container {
+    margin: auto;
+    height: 320px;
+    width: 691px;
+  }
+  .left-container-text {
+    font-size: 2rem;
+  }
 }
-.material-icons {
-  pointer-events: none;
-}
-.slideoff {
-  transform: translateX(-8rem);
-  opacity: 0;
+@media (max-width: 810px) {
+  .notes-container {
+    height: 320px;
+    width: 470px;
+  }
+  .notes-container-header {
+    display: flex;
+    flex-direction: column;
+  }
 }
