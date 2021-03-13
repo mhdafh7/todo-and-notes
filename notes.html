@@ -10,7 +10,6 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/notes.css" />
-    <link rel="stylesheet" href="css/filter.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -21,7 +20,7 @@
     <header class="main-header">
       <!-- Title, navigation and search -->
       <nav class="header-nav">
-        <a class="home">Todo & Notes</a>
+        <a class="home">Todos & Notes</a>
 
         <button class="nav-icon">
           <span class="nav-icon-bar"></span>
@@ -31,9 +30,13 @@
         <div class="nav-menu">
           <ul class="nav-links">
             <li class="nav-item nav-search">
-              <a class="nav-link" href="#"><i class="material-icons">search</i></a>
+              <a class="nav-link" href="#"
+                ><i class="material-icons">search</i></a
+              >
             </li>
-            <li class="nav-item"><a class="nav-link" href="index.html">todo</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">todo</a>
+            </li>
             <li class="nav-item"><a class="nav-link" href="#">notes</a></li>
           </ul>
         </div>
@@ -43,22 +46,39 @@
       <section class="left-container">
         <div class="left-container-header">
           <h3 class="left-container-title">Welcome back!</h3>
-          <h3 class="left-container-text">
-            You have <span class="notes-number">_</span> notes.
-          </h3>
+          <h3 class="left-container-text">Capture and organize your ideas.</h3>
         </div>
-        <img class="notes-img" src="./notes.svg" alt="image" />
+        <img class="note-img" src="./notes.svg" alt="image" />
       </section>
       <section class="right-container">
-        <div class="notes-container-header">
-          <h3 class="notes-title">All notes</h3>
-        </div>
-        <div class="notes-container">
-          <ul class="notes-list"></ul>
+        <div class="none-modal">
+          <div class="note-container-header">
+            <h3 class="note-title">Notes</h3>
+            <button class="new-note-btn"><i class="material-icons">
+              note_alt
+              </i> Add new</button>
+          </div>
+          <div class="note-container">
+            <ul class="note-list"></ul>
+          </div>
         </div>
       </section>
     </div>
+    <div class="note-modal-bg">
+      <label class="welcome-text-modal">New note</label>
+      <i class="material-icons md-36 modal-close">cancel</i>
+      <div class="note-modal">
+        <form class="note-form">
+          <input class="note-title-input" type="text" placeholder="Add Title" />
+          <textarea class="note-input" placeholder="Add Notes..."></textarea>
+          <button class="note-save-btn" type="submit">
+            <i class="material-icons">save</i> Save
+          </button>
+        </form>
+      </div>
+    </div>
 
-    <script src="app.js"></script>
+    <script type="module" src="./JS/app.js"></script>
+    <script type="module" src="./JS/notes.js"></script>
   </body>
 </html>
