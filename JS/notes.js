@@ -5,19 +5,20 @@ const noteModalBg = document.querySelector(".note-modal-bg");
 const noteModal = document.querySelector(".note-modal");
 const modalClose = document.querySelector(".modal-close");
 
-const noteTitleInput = document.querySelector(".note-title-input");
-const noteInput = document.querySelector(".note-input");
+const noteTitleInput = document.querySelector("#note-title-input");
+const noteInput = document.querySelector("#note-input");
 const noteSaveButton = document.querySelector(".note-save-btn");
 const noteList = document.querySelector(".note-list");
 const mainContainer = document.querySelector(".container");
+
 
 // Event listeners
 document.addEventListener("DOMContentLoaded", getNotes);
 newNoteButton.addEventListener("click", modalAppear);
 modalClose.addEventListener("click", modalDismiss);
 noteSaveButton.addEventListener("click", addNote);
-noteList.addEventListener("click", editDelete);
-
+noteList.addEventListener("click", noteAction);
+// note.addEventListener("click",openNote);
 // functions
 function modalAppear() {
   noteModalBg.classList.add("modal-visible");
@@ -26,23 +27,30 @@ function modalAppear() {
     noteInput.value = "";
     noteTitleInput.value = "";
   }
+  noteSaveButton.innerHTML = '<i class="material-icons">save</i> Save';
 }
 function modalDismiss() {
   if(noteModal.classList.contains("edit-modal")){
     noteModal.classList.remove("edit-modal");
   }
+  if(noteSaveButton.style.display == "none"){
+    noteSaveButton.style.display = "flex";
+    noteTitleInput.disabled = false;
+    noteInput.disabled = false;
+  }
   noteModalBg.classList.remove("modal-visible");
   mainContainer.style.removeProperty("filter");
 }
 
+
 function addNote(event) {
   event.preventDefault();
   if (!noteModal.classList.contains("edit-modal")) {
-
+    
     const noteDiv = document.createElement("div");
     // note li
     const newNote = document.createElement("li");
-
+    
     noteDiv.appendChild(newNote);
     if (noteTitleInput.value === "") {
       newNote.innerText = "Untitled";
@@ -68,17 +76,33 @@ function addNote(event) {
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("delete-btn");
     deleteButton.innerHTML =
-      '<i class="material-icons md-36">delete_outline</i>';
+    '<i class="material-icons md-36">delete_outline</i>';
     noteDiv.appendChild(deleteButton);
     noteList.appendChild(noteDiv);
-
+    
     noteInput.value = "";
     noteTitleInput.value = "";
   }
 }
 
-// edit and delete
-function editDelete(e) {
+function openNote(note) {
+  let notes = notesFromLocal();
+  
+  const noteTitle = note.children[0].innerText;
+  let noteItem = notes.find((note) => note.title === noteTitle);
+  modalAppear();
+  console.log(noteItem.title);
+  noteTitleInput.value = noteItem.title;
+  noteInput.value = noteItem.content;
+
+  noteTitleInput.disabled = true;
+  noteInput.disabled = true;
+  
+  document.querySelector(".welcome-text-modal").style.display = "none";
+  noteSaveButton.style.display = "none";
+}
+// edit, delete or open
+function noteAction(e) {
   const item = e.target;
   if (item.classList[0] === "delete-btn") {
     const note = item.parentElement;
@@ -90,21 +114,21 @@ function editDelete(e) {
     removeNote(note);
   }
   // edit note
-  if (item.classList[0] === "edit-btn") {
+  else if (item.classList[0] === "edit-btn") {
     noteModal.classList.add("edit-modal");
     const note = item.parentElement;
     editNote(note);
+  }
+  if(item.classList[0] === "note-item") {
+    const note = item.parentElement;
+    openNote(note);
   }
 }
 
 // Store function
 function Store(noteItem) {
-  let notes;
-  if (localStorage.getItem("notes") === null) {
-    notes = [];
-  } else {
-    notes = JSON.parse(localStorage.getItem("notes"));
-  }
+  let notes = notesFromLocal();
+
   notes.push(noteItem);
   localStorage.setItem("notes", JSON.stringify(notes));
 }
@@ -120,12 +144,8 @@ function storeNote(noteTitle, noteContent) {
 
 // UI
 function getNotes() {
-  let notes;
-  if (localStorage.getItem("notes") === null) {
-    notes = [];
-  } else {
-    notes = JSON.parse(localStorage.getItem("notes"));
-  }
+  let notes = notesFromLocal();
+
   notes.forEach(function (note) {
     const noteDiv = document.createElement("div");
     noteDiv.classList.add("note");
@@ -152,13 +172,8 @@ function getNotes() {
 
 // Remove note
 function removeNote(note) {
-  let notes;
+  let notes = notesFromLocal();
 
-  if (localStorage.getItem("notes") === null) {
-    notes = [];
-  } else {
-    notes = JSON.parse(localStorage.getItem("notes"));
-  }
   const noteTitle = note.children[0].innerText;
   const noteIndex = notes.find((note) => note.title === noteTitle);
   notes.splice(notes.indexOf(noteIndex), 1);
@@ -167,16 +182,12 @@ function removeNote(note) {
 
 // edit note
 function editNote(note) {
-  let notes;
+  let notes = notesFromLocal();
 
-  if (localStorage.getItem("notes") === null) {
-    notes = [];
-  } else {
-    notes = JSON.parse(localStorage.getItem("notes"));
-  }
   const noteTitle = note.children[0].innerText;
-  console.log(noteTitle);
   let noteItem = notes.find((note) => note.title === noteTitle);
+
+  document.querySelector(".welcome-text-modal").style.display = "none";
 
   modalAppear();
   noteTitleInput.value = noteItem.title;
@@ -193,4 +204,16 @@ function editNote(note) {
       modalDismiss();
     }
   });
+}
+
+// Get notes from local browser storage
+function notesFromLocal(){
+  let notes;
+  
+  if (localStorage.getItem("notes") === null) {
+    notes = [];
+  } else {
+    notes = JSON.parse(localStorage.getItem("notes"));
+  }
+  return notes;
 }
