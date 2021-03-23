@@ -4,6 +4,20 @@
   margin-top: 4rem;
   z-index: -5;
 }
+.note-empty-img {
+  height: 267px;
+  width: 483px;
+  margin: 0 auto;
+  margin-top: 4rem;
+  position: absolute;
+  transition: all 0.3s ease;
+}
+.note-empty-caption{
+  position: absolute;
+  margin: auto;
+  top: 2rem;
+  opacity: .6;
+}
 
 .left-container-text {
   display: inline-block;
@@ -63,7 +77,6 @@
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.5s;
-
 }
 .modal-visible {
   visibility: visible;
@@ -192,6 +205,7 @@
   height: 430px;
   width: 830px;
   scroll-behavior: smooth;
+  position: relative;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .note-container::-webkit-scrollbar {
@@ -211,7 +225,7 @@
 }
 .note {
   margin: 0.7rem;
-  padding: .5rem;
+  padding: 0.5rem;
   background: #f2f6f5;
   font-size: 1.2rem;
   color: #555859;
@@ -308,5 +322,20 @@
   .note-container-header {
     display: flex;
     flex-direction: column;
+  }
+  .new-note-btn {
+    width: 450px;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 576px) {
+  .note-container {
+    width: 360px;
+  }
+  .new-note-btn{
+    width: 350px;
   }
 }

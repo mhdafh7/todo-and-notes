@@ -184,6 +184,7 @@ body {
   display: flex;
   margin-bottom: 5rem;
   justify-content: space-between;
+  position: relative;
 }
 
 .left-container {
@@ -193,13 +194,9 @@ body {
   justify-content: center;
   margin: 0 5rem;
   margin-top: 10rem;
+  position: relative;
 }
-.todo-img {
-  height: 267px;
-  width: 483px;
-  margin-top: 4rem;
-  z-index: -5;
-}
+
 .left-container-header {
   align-self: flex-start;
   margin: 2rem;
@@ -213,15 +210,6 @@ body {
   margin-top: 2rem;
   font-weight: 400;
   font-size: 2rem;
-}
-.todo-number {
-  display: inline-block;
-  font-weight: 500;
-  font-size: 2.1rem;
-  color: #76db9b;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  text-decoration: underline;
-  transition: all 0.5s ease-in;
 }
 
 .right-container {
@@ -262,6 +250,10 @@ body {
 
 .alert-close-btn:hover {
   color: black;
+}
+.slideoff {
+  transform: translateX(-8rem);
+  opacity: 0;
 }
 
 @media (min-width: 960px) {
@@ -369,7 +361,7 @@ body {
   .todo-container {
     margin: auto;
     height: 320px;
-    width: 691px;
+    width: 710px;
   }
 }
 
@@ -407,7 +399,7 @@ body {
   }
   .todo-container{
     height: 320px;
-    width: 420px;
+    width: 470px;
   }
   .todo-container-header{
     display: flex;
@@ -415,10 +407,6 @@ body {
   }
   .todo-title{
     font-size: 2rem;
-  }
-  .todo-container{
-    height: 320px;
-    width: 470px;
   }
   .todo-container-header{
     display: flex;

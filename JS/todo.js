@@ -7,11 +7,23 @@ const todoButton = document.querySelector(".todo-btn");
 const todoList = document.querySelector(".todo-list");
 const filterOption = document.querySelector(".filter-todo");
 
-// e listeners
+// event listeners
 document.addEventListener("DOMContentLoaded", getTodos);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", checkDelete);
 filterOption.addEventListener("click", filterTodo);
+
+setInterval(() => {
+  if (todoList.childElementCount === 0) {
+    document.querySelector(".todo-empty-img").style.display = "flex";
+    document.querySelector(".todo-empty-caption").style.display = "flex";
+    document.querySelector(".filter-select-wrapper").style.display = "none";
+  } else {
+    document.querySelector(".todo-empty-img").style.display = "none";
+    document.querySelector(".todo-empty-caption").style.display = "none";
+    document.querySelector(".filter-select-wrapper").style.display = "block";
+  }
+}, 10);
 
 // Functions
 function addTodo(event) {
@@ -28,12 +40,7 @@ function addTodo(event) {
 
     // Store
     Store(storeTodo(todoInput.value, "incomplete"));
-    let todos;
-    if (localStorage.getItem("todos") === null) {
-      todos = [];
-    } else {
-      todos = JSON.parse(localStorage.getItem("todos"));
-    }
+    let todos = todosFromLocal();
     let noOfTodos = 0;
     todos.forEach((todo) => {
       if (!(todo.filter === "completed")) {
@@ -59,7 +66,10 @@ function addTodo(event) {
 
     todoInput.value = "";
   } else {
-    showAlert("Todo title cannot be empty!!!");
+    const alert = document.querySelector(".alert");
+    if(!document.contains(alert)){
+      showAlert("Todo title cannot be empty!!!");
+    }
   }
 }
 // Check and delete todo
@@ -79,12 +89,7 @@ function checkDelete(e) {
     const todo = item.parentElement;
     checkTodo(todo);
   }
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
+  let todos = todosFromLocal();
   let noOfTodos = 0;
   todos.forEach((todo) => {
     if (!(todo.filter === "completed")) {
@@ -133,24 +138,14 @@ function storeTodo(todoItem, filterClass) {
 
 // Store
 function Store(todoItem) {
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
+  let todos = todosFromLocal();
   todos.push(todoItem);
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 // UI
 function getTodos() {
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
+  let todos = todosFromLocal();
   let noOfTodos = 0;
   todos.forEach((todo) => {
     if (!(todo.filter === "completed")) {
@@ -190,13 +185,7 @@ function getTodos() {
 
 // Remove todo
 function removeTodo(todo) {
-  let todos;
-
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
+  let todos = todosFromLocal();
   const todoTitle = todo.children[0].innerText;
   const todoIndex = todos.find((todo) => todo.title === todoTitle);
   todos.splice(todos.indexOf(todoIndex), 1);
@@ -204,13 +193,7 @@ function removeTodo(todo) {
 }
 // Add persistence to completed class(check)
 function checkTodo(todo) {
-  let todos;
-
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
+  let todos = todosFromLocal();
   const todoTitle = todo.children[0].innerText;
   let todoItem = todos.find((todo) => todo.title === todoTitle);
   todoItem.filter = "completed";
@@ -246,3 +229,15 @@ window.addEventListener("click", function (e) {
     select.classList.remove("open");
   }
 });
+
+// Get todos from local browser storage
+function todosFromLocal() {
+  let todos;
+
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  return todos;
+}

@@ -31,10 +31,14 @@
         <div class="nav-menu">
           <ul class="nav-links">
             <li class="nav-item nav-search">
-              <a class="nav-link" href="#"><i class="material-icons">search</i></a>
+              <a class="nav-link" href="#"
+                ><i class="material-icons">search</i></a
+              >
             </li>
             <li class="nav-item"><a class="nav-link" href="#">todo</a></li>
-            <li class="nav-item"><a class="nav-link" href="notes.html">notes</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="notes.html">notes</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -47,7 +51,7 @@
             You have <span class="todo-number">_</span> tasks to complete.
           </h3>
         </div>
-        <img class="todo-img" src="./todo.svg" alt="image" />
+        <img class="todo-img" src="img/todo.svg" alt="image" />
       </section>
       <section class="right-container">
         <div class="todo-container-header">
@@ -78,6 +82,8 @@
           </button>
         </form>
         <div class="todo-container">
+          <img class="todo-empty-img" src="img/undraw_void_3ggu.svg" />
+          <h4 class="todo-empty-caption">Todo list is empty</h4>
           <ul class="todo-list"></ul>
         </div>
       </section>

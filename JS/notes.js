@@ -11,29 +11,39 @@ const noteSaveButton = document.querySelector(".note-save-btn");
 const noteList = document.querySelector(".note-list");
 const mainContainer = document.querySelector(".container");
 
-
 // Event listeners
 document.addEventListener("DOMContentLoaded", getNotes);
 newNoteButton.addEventListener("click", modalAppear);
 modalClose.addEventListener("click", modalDismiss);
 noteSaveButton.addEventListener("click", addNote);
 noteList.addEventListener("click", noteAction);
-// note.addEventListener("click",openNote);
+
+setInterval(() => {
+  if (noteList.childElementCount === 0) {
+    document.querySelector(".note-empty-img").style.display = "flex";
+    document.querySelector(".note-empty-caption").style.display = "flex";
+  } else {
+    document.querySelector(".note-empty-img").style.display = "none";
+    document.querySelector(".note-empty-caption").style.display = "none"
+  }
+}, 10);
+
 // functions
 function modalAppear() {
   noteModalBg.classList.add("modal-visible");
   mainContainer.style.filter = "blur(10px)";
-  if(!noteModal.classList.contains("edit-modal")){
+  if (!noteModal.classList.contains("edit-modal")) {
     noteInput.value = "";
     noteTitleInput.value = "";
   }
   noteSaveButton.innerHTML = '<i class="material-icons">save</i> Save';
+  document.querySelector(".welcome-text-modal").style.display = "flex";
 }
 function modalDismiss() {
-  if(noteModal.classList.contains("edit-modal")){
+  if (noteModal.classList.contains("edit-modal")) {
     noteModal.classList.remove("edit-modal");
   }
-  if(noteSaveButton.style.display == "none"){
+  if (noteSaveButton.style.display == "none") {
     noteSaveButton.style.display = "flex";
     noteTitleInput.disabled = false;
     noteInput.disabled = false;
@@ -42,15 +52,13 @@ function modalDismiss() {
   mainContainer.style.removeProperty("filter");
 }
 
-
 function addNote(event) {
   event.preventDefault();
   if (!noteModal.classList.contains("edit-modal")) {
-    
     const noteDiv = document.createElement("div");
     // note li
     const newNote = document.createElement("li");
-    
+
     noteDiv.appendChild(newNote);
     if (noteTitleInput.value === "") {
       newNote.innerText = "Untitled";
@@ -76,31 +84,15 @@ function addNote(event) {
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("delete-btn");
     deleteButton.innerHTML =
-    '<i class="material-icons md-36">delete_outline</i>';
+      '<i class="material-icons md-36">delete_outline</i>';
     noteDiv.appendChild(deleteButton);
     noteList.appendChild(noteDiv);
-    
+
     noteInput.value = "";
     noteTitleInput.value = "";
   }
 }
 
-function openNote(note) {
-  let notes = notesFromLocal();
-  
-  const noteTitle = note.children[0].innerText;
-  let noteItem = notes.find((note) => note.title === noteTitle);
-  modalAppear();
-  console.log(noteItem.title);
-  noteTitleInput.value = noteItem.title;
-  noteInput.value = noteItem.content;
-
-  noteTitleInput.disabled = true;
-  noteInput.disabled = true;
-  
-  document.querySelector(".welcome-text-modal").style.display = "none";
-  noteSaveButton.style.display = "none";
-}
 // edit, delete or open
 function noteAction(e) {
   const item = e.target;
@@ -119,7 +111,7 @@ function noteAction(e) {
     const note = item.parentElement;
     editNote(note);
   }
-  if(item.classList[0] === "note-item") {
+  if (item.classList[0] === "note-item") {
     const note = item.parentElement;
     openNote(note);
   }
@@ -190,6 +182,7 @@ function editNote(note) {
   document.querySelector(".welcome-text-modal").style.display = "none";
 
   modalAppear();
+  document.querySelector(".welcome-text-modal").style.display = "none";
   noteTitleInput.value = noteItem.title;
   noteInput.value = noteItem.content;
 
@@ -206,10 +199,28 @@ function editNote(note) {
   });
 }
 
+// open note
+function openNote(note) {
+  let notes = notesFromLocal();
+
+  const noteTitle = note.children[0].innerText;
+  let noteItem = notes.find((note) => note.title === noteTitle);
+  modalAppear();
+  console.log(noteItem.title);
+  noteTitleInput.value = noteItem.title;
+  noteInput.value = noteItem.content;
+
+  noteTitleInput.disabled = true;
+  noteInput.disabled = true;
+
+  document.querySelector(".welcome-text-modal").style.display = "none";
+  noteSaveButton.style.display = "none";
+}
+
 // Get notes from local browser storage
-function notesFromLocal(){
+function notesFromLocal() {
   let notes;
-  
+
   if (localStorage.getItem("notes") === null) {
     notes = [];
   } else {
