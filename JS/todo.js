@@ -1,18 +1,29 @@
+import showAlert from "./app.js";
+// ############ TODO ###########
+
 // selectors
 const todoInput = document.querySelector(".todo-input");
-const todoButton = document.querySelector(".todo-button");
+const todoButton = document.querySelector(".todo-btn");
 const todoList = document.querySelector(".todo-list");
 const filterOption = document.querySelector(".filter-todo");
-const navToggle = document.querySelector(".nav-icon");
-const headerNav = document.querySelector(".header-nav");
-const navMenu = headerNav.querySelector(".nav-menu");
-const navLinks = headerNav.querySelector(".nav-links");
 
-// e listeners
+// event listeners
 document.addEventListener("DOMContentLoaded", getTodos);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", checkDelete);
 filterOption.addEventListener("click", filterTodo);
+
+setInterval(() => {
+  if (todoList.childElementCount === 0) {
+    document.querySelector(".todo-empty-img").style.display = "flex";
+    document.querySelector(".todo-empty-caption").style.display = "flex";
+    document.querySelector(".filter-select-wrapper").style.display = "none";
+  } else {
+    document.querySelector(".todo-empty-img").style.display = "none";
+    document.querySelector(".todo-empty-caption").style.display = "none";
+    document.querySelector(".filter-select-wrapper").style.display = "block";
+  }
+}, 10);
 
 // Functions
 function addTodo(event) {
@@ -29,12 +40,7 @@ function addTodo(event) {
 
     // Store
     Store(storeTodo(todoInput.value, "incomplete"));
-    let todos;
-    if (localStorage.getItem("todos") === null) {
-      todos = [];
-    } else {
-      todos = JSON.parse(localStorage.getItem("todos"));
-    }
+    let todos = todosFromLocal();
     let noOfTodos = 0;
     todos.forEach((todo) => {
       if (!(todo.filter === "completed")) {
@@ -60,7 +66,10 @@ function addTodo(event) {
 
     todoInput.value = "";
   } else {
-    showAlert("Todo title cannot be empty!!!");
+    const alert = document.querySelector(".alert");
+    if(!document.contains(alert)){
+      showAlert("Todo title cannot be empty!!!");
+    }
   }
 }
 // Check and delete todo
@@ -80,12 +89,7 @@ function checkDelete(e) {
     const todo = item.parentElement;
     checkTodo(todo);
   }
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
+  let todos = todosFromLocal();
   let noOfTodos = 0;
   todos.forEach((todo) => {
     if (!(todo.filter === "completed")) {
@@ -134,24 +138,14 @@ function storeTodo(todoItem, filterClass) {
 
 // Store
 function Store(todoItem) {
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
+  let todos = todosFromLocal();
   todos.push(todoItem);
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 // UI
 function getTodos() {
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
+  let todos = todosFromLocal();
   let noOfTodos = 0;
   todos.forEach((todo) => {
     if (!(todo.filter === "completed")) {
@@ -161,7 +155,6 @@ function getTodos() {
   document.querySelector(".todo-number").innerText = noOfTodos;
 
   todos.forEach(function (todo) {
-    // if (todoInput.value !== "") {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo");
     // Todo li
@@ -187,19 +180,12 @@ function getTodos() {
       '<i class="material-icons md-36">delete_outline</i>';
     todoDiv.appendChild(deleteButton);
     todoList.appendChild(todoDiv);
-    // }
   });
 }
 
 // Remove todo
 function removeTodo(todo) {
-  let todos;
-
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
+  let todos = todosFromLocal();
   const todoTitle = todo.children[0].innerText;
   const todoIndex = todos.find((todo) => todo.title === todoTitle);
   todos.splice(todos.indexOf(todoIndex), 1);
@@ -207,13 +193,7 @@ function removeTodo(todo) {
 }
 // Add persistence to completed class(check)
 function checkTodo(todo) {
-  let todos;
-
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
+  let todos = todosFromLocal();
   const todoTitle = todo.children[0].innerText;
   let todoItem = todos.find((todo) => todo.title === todoTitle);
   todoItem.filter = "completed";
@@ -221,43 +201,6 @@ function checkTodo(todo) {
   todos.splice(todos.indexOf(todoItem), 1);
   todos.unshift(todoItem);
   localStorage.setItem("todos", JSON.stringify(todos));
-}
-
-// Alert
-function showAlert(message) {
-  const div = document.createElement("div");
-  div.className = "alert";
-  const span = document.createElement("span");
-  span.className = "alert-close-btn material-icons";
-  span.innerHTML = "highlight_off";
-  div.appendChild(document.createTextNode(message));
-  div.appendChild(span);
-  span.addEventListener("click", () => {
-    this.parentElement.style.display = none;
-  });
-  const container = document.querySelector(".right-container");
-  const form = document.querySelector(".new-todo-form");
-  container.insertBefore(div, form);
-
-  let close = document.getElementsByClassName("alert-close-btn");
-  let i;
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
-      let div = this.parentElement;
-      div.style.opacity = "0";
-      setTimeout(function () {
-        div.style.display = "none";
-      }, 600);
-    };
-  }
-  // Vanish in 3 sec
-  setTimeout(() => {
-    document.querySelector(".alert").style.opacity = "0";
-    setTimeout(() => {
-      document.querySelector(".alert").remove();
-    }, 300);
-  }, 3000);
 }
 
 // Select dropdown
@@ -287,26 +230,14 @@ window.addEventListener("click", function (e) {
   }
 });
 
-// Navigation burger menu
-function openMobileNavbar() {
-  headerNav.classList.add("opened");
-  navToggle.setAttribute("aria-label", "Close navigation menu.");
-}
+// Get todos from local browser storage
+function todosFromLocal() {
+  let todos;
 
-function closeMobileNavbar() {
-  headerNav.classList.remove("opened");
-  navToggle.setAttribute("aria-label", "Open navigation menu.");
-}
-
-navToggle.addEventListener("click", () => {
-  if (headerNav.classList.contains("opened")) {
-    closeMobileNavbar();
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
   } else {
-    openMobileNavbar();
+    todos = JSON.parse(localStorage.getItem("todos"));
   }
-});
-navLinks.addEventListener("click", (clickEvent) => {
-  clickEvent.stopPropagation();
-});
-
-navMenu.addEventListener("click", closeMobileNavbar);
+  return todos;
+}

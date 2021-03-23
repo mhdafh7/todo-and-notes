@@ -8,9 +8,9 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/todo.css" />
     <link rel="stylesheet" href="css/filter.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -21,7 +21,7 @@
     <header class="main-header">
       <!-- Title, navigation and search -->
       <nav class="header-nav">
-        <a class="home">Todo <span> App</span></a>
+        <a class="home">Todos & Notes</a>
 
         <button class="nav-icon">
           <span class="nav-icon-bar"></span>
@@ -31,10 +31,14 @@
         <div class="nav-menu">
           <ul class="nav-links">
             <li class="nav-item nav-search">
-              <a class="nav-link" href="#"><i class="material-icons">search</i></a>
+              <a class="nav-link" href="#"
+                ><i class="material-icons">search</i></a
+              >
             </li>
             <li class="nav-item"><a class="nav-link" href="#">todo</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">notes</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="notes.html">notes</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -47,11 +51,11 @@
             You have <span class="todo-number">_</span> tasks to complete.
           </h3>
         </div>
-        <img src="./undraw_task_list_6x9d.svg" alt="image" />
+        <img class="todo-img" src="img/todo.svg" alt="image" />
       </section>
       <section class="right-container">
         <div class="todo-container-header">
-          <h3 class="todo-title">Today</h3>
+          <h3 class="todo-title">Todos</h3>
 
           <div class="filter-select-wrapper">
             <div class="filter-select">
@@ -73,16 +77,19 @@
         </div>
         <form class="new-todo-form">
           <input type="text" class="todo-input" required />
-          <button class="todo-button" type="submit">
+          <button class="todo-btn" type="submit">
             <i class="material-icons md-36">add</i>
           </button>
         </form>
         <div class="todo-container">
+          <img class="todo-empty-img" src="img/undraw_void_3ggu.svg" />
+          <h4 class="todo-empty-caption">Todo list is empty</h4>
           <ul class="todo-list"></ul>
         </div>
       </section>
     </div>
 
-    <script src="app.js"></script>
+    <script type="module" src="./JS/todo.js"></script>
+    <script type="module" src="./JS/app.js"></script>
   </body>
 </html>

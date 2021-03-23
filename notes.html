@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/notes.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <title>Todo & Notes</title>
+  </head>
+  <body>
+    <header class="main-header">
+      <!-- Title, navigation and search -->
+      <nav class="header-nav">
+        <a class="home">Todos & Notes</a>
+
+        <button class="nav-icon">
+          <span class="nav-icon-bar"></span>
+          <span class="nav-icon-bar"></span>
+          <span class="nav-icon-bar"></span>
+        </button>
+        <div class="nav-menu">
+          <ul class="nav-links">
+            <li class="nav-item nav-search">
+              <a class="nav-link" href="#"
+                ><i class="material-icons">search</i></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">todo</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">notes</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      <section class="left-container">
+        <div class="left-container-header">
+          <h3 class="left-container-title">Welcome back!</h3>
+          <h3 class="left-container-text">Capture and organize your ideas.</h3>
+        </div>
+        <img class="note-img" src="img/notes.svg" alt="image" />
+      </section>
+      <section class="right-container">
+        <div class="none-modal">
+          <div class="note-container-header">
+            <h3 class="note-title">Notes</h3>
+            <button class="new-note-btn">
+              <i class="material-icons"> note_alt </i> Add new
+            </button>
+          </div>
+          <div class="note-container">
+            <img class="note-empty-img" src="img/undraw_empty_xct9.svg">
+            <h4 class="note-empty-caption">Note list is empty</h4>
+            <ul class="note-list"></ul>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="note-modal-bg">
+      <label class="welcome-text-modal">New note</label>
+      <i class="material-icons md-36 modal-close">cancel</i>
+      <div class="note-modal">
+        <form class="note-form">
+          <input id="note-title-input" type="text" placeholder="Add Title" />
+          <textarea id="note-input" placeholder="Add Notes..."></textarea>
+          <button class="note-save-btn" type="submit"></button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="./JS/app.js"></script>
+    <script type="module" src="./JS/notes.js"></script>
+  </body>
+</html>
